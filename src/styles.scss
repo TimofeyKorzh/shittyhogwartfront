@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
+@import "./normalize.css";
+
+@font-face {
+  font-family: 'MinionPro';
+  src: local('Minion'), url(fonts/Minion.ttf) format('truetype');
+}
+
+html,
+body,
+#root {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  font-family: 'MinionPro', serif;
+}
+
+
+.result {
+  border-radius: 4px;
+  padding: 2em;
+  width: calc(50% - 4em);
+  margin-top: 2em;
+  line-height: 27px;
+}
+
+.pending {
+  border: 1px solid #ffeb3b;
+  background-color: #fffde7;
+}
+
+.valid {
+  background-color: #e1f5fe;
+  border: 1px solid #03a9f4;
+}
+
+.error {
+  background-color: #ffebee;
+  color: #f44336;
+}
+.image {
+	position	: relative;
+	width		: 100%; /* for IE 6 */
+}
+
+.hide-mobile
+{
+    display: none;
+}
+.show-mobile
+{
+    display: block;
+}
+@media only screen and (min-width: 650px) {
+
+    .hide-mobile
+    {
+        display: block;
+    }
+    .show-mobile
+    {
+        display: none;
+    }
+  }
+.Back {
+	position	: relative;
+	top		: 34%;
+	left		: 20%;
+	width		: 100%;
+  z-index: 1;
+}
+img {
+  max-width: 100%;
+  height: 100%;
+}
+
+.myelement {
+  clear:left;
+  height:25px;
+  margin-top: 20px;  // See below for explanation of this
+ }
