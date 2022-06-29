@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 
 
-const ENDPOINT_VARS_URL = "http://46.17.97.44:5005/potter_variants";
-const ENDPOINT_URL = "http://46.17.97.44:5005/potter_plain";
+const ENDPOINT_VARS_URL = "https://api.hogwarts.monetka.name/potter_variants";
+const ENDPOINT_URL = "https://api.hogwarts.monetka.name/potter_plain";
 //const ENDPOINT_URL = "http://127.0.0.1:5000/generate";
 
 const useAsyncEndpoint = fn => {
