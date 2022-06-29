@@ -1,3 +1,3 @@
-# SBWriterFront
-Simple react app to interface with [ponyfiction GPT-2 backend](https://github.com/TimofeyKorzh/SBWBackend).
+# Всратый Хогвартс
+Интерфейс для этого!
 Made with [create-react-app](https://github.com/facebook/create-react-app)
