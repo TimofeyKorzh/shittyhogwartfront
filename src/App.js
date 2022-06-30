@@ -11,19 +11,38 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { withStyles } from '@material-ui/core/styles'
 import { Container } from '@material-ui/core';
 import { Box } from '@material-ui/core';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const TITLE = 'Всратый Хогвратс';
+
+
 function App() {
   const [toggle, setToggle] = useState(false);
   const [toggleText, setToggleText] = useState(false);
   const [text, setText] = useState("Раннее утро.");
+  const [viewText, setViewText] = useState(text);
   const [generatedText, postGenerateText] = postGenerateTextEndpoint();
   const [generatedVars, postGenerateVars] = postGenerateVarsEndpoint();
   const [isStarted, setStarted] = useState(false)
   const [VariantsButtons, setVariantButtons] = useState([])
-  const handleChange = (event) => {
-    setText(event.target.value);
+  const [selfVariant, setSelfVariant] = useState("")
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleFormChange = (event) => {
+    setSelfVariant(event.target.value);
+  };
+
 
 
   useEffect(() => {
@@ -84,24 +103,44 @@ const AdornedButton = (props) => {
     generatedText.pending = true;
     var prompt = text + "<query>" + t + "<query>"
     postGenerateText({prompt});
+    setViewText(viewText+"\n > "+ t+"\n")
     setToggleText(false);
   }
+
+  const generateTextFromDialog = () => {
+    let t = selfVariant
+    setOpen(false);
+    setStarted(false)
+    generatedText.complete = false;
+    generatedText.pending = true;
+    var prompt = text + "<query>" + t + "<query>"
+    postGenerateText({prompt});
+    setViewText(viewText+"\n > "+ t+"\n")
+    setToggleText(false);
+  }
+
   if (generatedText.complete && !generatedText.error && !toggleText){
     
     generatedText.pending = false;
     console.log(generatedText.data.text)
     setText(text+" "+ generatedText.data.text);
+    setViewText(viewText+" "+ generatedText.data.text)
     setToggleText(true);
   }
   if (generatedVars.complete && !generatedVars.error && !toggle){
     setStarted(true)
     console.log(generatedVars)
-    let VButtons = []
+    let VButtons = [];
+    let i = 0;
     generatedVars.data.variants.forEach((variant, index)=>{
       VButtons.push(<AdornedButton key = {index} onClick={generateText} Text={variant} loading = {generatedText.pending}>
         {variant}
-       </AdornedButton>)
+       </AdornedButton>);
+       i = index;
     })
+    VButtons.push(<AdornedButton key = {i+1} onClick={handleClickOpen} loading = {generatedText.pending}>
+    Свой вариант
+   </AdornedButton>)
     setVariantButtons(VButtons)
     console.log(VariantsButtons)
     //setText(generatedVars.data.variants[0]);
@@ -114,7 +153,7 @@ const AdornedButton = (props) => {
       </div>
     <div className='app-container'>
       
-    <YMInitializer accounts={[83732773]} options={{webvisor: true}}/>
+    <YMInitializer accounts={[89370862]} options={{webvisor: true}}/>
     
     <form noValidate autoComplete='off'> 
     <div>
@@ -131,7 +170,7 @@ const AdornedButton = (props) => {
        
        
        <Box textAlign='center'>
-        {text.replace('<query>', ' ').replace('</query>', ' ').split('\n').map(str => <p>{str}</p>)}
+        {viewText.replace('<query>', ' ').replace('</query>', ' ').split('\n').map(str => <p>{str}</p>)}
         </Box>
         <Box textAlign='center'>
         {
@@ -149,6 +188,25 @@ const AdornedButton = (props) => {
         </form>
       
     </div>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Свой вариант</DialogTitle>
+        <DialogContent>
+          
+          <TextField
+            autoFocus
+            margin="dense"
+            id="selfaction"
+            label="Что ты ты делаешь?"
+            fullWidth
+            variant="standard"
+            onChange={handleFormChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Отмена</Button>
+          <Button onClick={generateTextFromDialog}>Ввод</Button>
+        </DialogActions>
+      </Dialog>
     <small>by <a href="https://t.me/lovedeathtransformers">Alex Wortega</a>, <a href="https://monetka.name">Moneta</a> and Anon</small>
     </MuiThemeProvider>
   );
