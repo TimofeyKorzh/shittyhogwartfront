@@ -101,7 +101,7 @@ const AdornedButton = (props) => {
     setStarted(false)
     generatedText.complete = false;
     generatedText.pending = true;
-    var prompt = text + "<query>" + t + "<query>"
+    var prompt = text + " <|query|> " + t + " <|query|> "
     postGenerateText({prompt});
     setViewText(viewText+"\n > "+ t+"\n")
     setToggleText(false);
@@ -113,7 +113,7 @@ const AdornedButton = (props) => {
     setStarted(false)
     generatedText.complete = false;
     generatedText.pending = true;
-    var prompt = text + " <query> " + t + " <query> "
+    var prompt = text + " <|query|> " + t + " <|query|> "
     postGenerateText({prompt});
     setViewText(viewText+"\n > "+ t+"\n")
     setToggleText(false);
@@ -125,7 +125,7 @@ const AdornedButton = (props) => {
     console.log(generatedText.data.text)
     setText(text+" "+ generatedText.data.text);
     setViewText(viewText+" "+ generatedText.data.text)
-    console.log(viewText.replace("<query>", ' ').replace("</query>", ' '))
+    console.log(viewText.replace("<|query|>", ' ').replace("<|query|>", ' '))
     setToggleText(true);
   }
   if (generatedVars.complete && !generatedVars.error && !toggle){
@@ -172,7 +172,7 @@ const AdornedButton = (props) => {
        
        
        <Box textAlign='center'>
-        {viewText.replace('<query>', ' ').replace('</query>', ' ').split('\n').map(str => <p>{str}</p>)}
+        {viewText.replace('<|query|>', ' ').replace('<|query|>', ' ').split('\n').map(str => <p>{str}</p>)}
         </Box>
         <Box textAlign='center'>
         {
