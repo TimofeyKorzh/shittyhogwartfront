@@ -2,8 +2,11 @@ import React from 'react';
 import axios from 'axios';
 
 
-const ENDPOINT_VARS_URL = "https://api.hogwarts.monetka.name/potter_variants";
-const ENDPOINT_URL = "https://api.hogwarts.monetka.name/potter_plain";
+const domains = ['https://d032d2e093ebd442a8dc825a6c5746345.clg07azjl.paperspacegradient.com']
+
+
+const ENDPOINT_VARS_URL = "/potter_variants";
+const ENDPOINT_URL = "/potter_plain";
 //const ENDPOINT_URL = "http://127.0.0.1:5000/generate";
 
 const useAsyncEndpoint = fn => {
@@ -27,10 +30,12 @@ const useAsyncEndpoint = fn => {
 
 export const postGenerateTextEndpoint = () => {
     /* eslint-disable react-hooks/rules-of-hooks */
-    return useAsyncEndpoint(data => ({ url: ENDPOINT_URL, method: "POST", data }));
+    var url_ = domains[Math.floor(Math.random()*domains.length)] + ENDPOINT_URL;
+    return useAsyncEndpoint(data => ({ url: url_, method: "POST", data }));
 }
 
 export const postGenerateVarsEndpoint = () => {
     /* eslint-disable react-hooks/rules-of-hooks */
-    return useAsyncEndpoint(data => ({ url: ENDPOINT_VARS_URL, method: "POST", data }));
+    var url_ = domains[Math.floor(Math.random()*domains.length)] + ENDPOINT_VARS_URL;
+    return useAsyncEndpoint(data => ({ url: url_, method: "POST", data }));
 }

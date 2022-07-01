@@ -113,7 +113,7 @@ const AdornedButton = (props) => {
     setStarted(false)
     generatedText.complete = false;
     generatedText.pending = true;
-    var prompt = text + "<query>" + t + "<query>"
+    var prompt = text + " <query> " + t + " <query> "
     postGenerateText({prompt});
     setViewText(viewText+"\n > "+ t+"\n")
     setToggleText(false);
@@ -125,6 +125,7 @@ const AdornedButton = (props) => {
     console.log(generatedText.data.text)
     setText(text+" "+ generatedText.data.text);
     setViewText(viewText+" "+ generatedText.data.text)
+    console.log(viewText.replace("<query>", ' ').replace("</query>", ' '))
     setToggleText(true);
   }
   if (generatedVars.complete && !generatedVars.error && !toggle){
@@ -165,6 +166,7 @@ const AdornedButton = (props) => {
        
        
        <span><h1>Всратый Хогвартс</h1></span>
+       <small>by <a href="https://t.me/lovedeathtransformers">Alex Wortega</a>, <a href="https://monetka.name">Moneta</a> and Anon</small>
        </div>
        
        
@@ -207,7 +209,7 @@ const AdornedButton = (props) => {
           <Button onClick={generateTextFromDialog}>Ввод</Button>
         </DialogActions>
       </Dialog>
-    <small>by <a href="https://t.me/lovedeathtransformers">Alex Wortega</a>, <a href="https://monetka.name">Moneta</a> and Anon</small>
+    
     </MuiThemeProvider>
   );
 }
