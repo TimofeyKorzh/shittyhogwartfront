@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-const domains = ['https://d032d2e093ebd442a8dc825a6c5746345.clg07azjl.paperspacegradient.com']
+const domains = ['https://api.hogwarts.monetka.name']
 
 
 const ENDPOINT_VARS_URL = "/potter_variants";
