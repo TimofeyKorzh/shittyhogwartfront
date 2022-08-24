@@ -171,7 +171,7 @@ const AdornedButton = (props) => {
        
        
        
-       <Box textAlign='center'>
+       <Box textAlign='left'>
         {viewText.replace('<|query|>', ' ').replace('<|query|>', ' ').split('\n').map(str => <p>{str}</p>)}
         </Box>
         <Box textAlign='center'>
